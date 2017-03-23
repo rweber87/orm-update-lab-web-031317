@@ -1,3 +1,4 @@
+require 'pry'
 require "spec_helper"
 
 describe "Student" do
@@ -53,6 +54,7 @@ describe "Student" do
       sarah = Student.new("Sarah", "9th")
       sarah.save
       expect(DB[:conn].execute("SELECT * FROM students")).to eq([[1, "Sarah", "9th"]])
+      # binding.pry
       expect(sarah.id).to eq(1)
     end
 
@@ -78,7 +80,6 @@ describe "Student" do
     it 'creates an instance with corresponding attribute values' do
       row = [1, "Pat", 12]
       pat = Student.new_from_db(row)
-
       expect(pat.id).to eq(row[0])
       expect(pat.name).to eq(row[1])
       expect(pat.grade).to eq(row[2])
@@ -106,8 +107,6 @@ describe "Student" do
       expect(josh_jr.id).to eq(josh.id)
     end
   end
-
-
 
 
 end
